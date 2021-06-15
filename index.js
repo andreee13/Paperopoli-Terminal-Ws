@@ -4,7 +4,7 @@ import ws from "ws";
 
 const { Server, OPEN } = ws;
 const server = createServer();
-const port = 6000;
+const port = 8082;
 const wss = new Server({ noServer: true, clientTracking: true });
 
 server.listen(port, () => {
