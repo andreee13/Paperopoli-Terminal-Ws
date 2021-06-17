@@ -1,5 +1,4 @@
-import { createServer } from "http";
-import { parse } from "url";
+import { createServer } from "http"; import { parse } from "url"; 
 import ws from "ws";
 
 const { Server, OPEN } = ws;
@@ -36,10 +35,12 @@ wss.on("connection", (ws) => {
     })
   );
   ws.on("message", (msg) => {
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === OPEN) {
-        client.send(msg);
-      }
-    });
+    if(!JSON.parse(msg).alive) {
+      wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === OPEN) {
+          client.send(msg);
+        }
+      });
+    }
   });
 });
